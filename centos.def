@@ -1,8 +1,19 @@
 BootStrap: docker
 From: centos:8
 
+%labels
+MAINTAINER Kees de Jong
+
 %post
-    yum -y update && yum -y install epel-release && yum -y install neofetch
+echo "Just a test build"
+yum -y update && yum -y install epel-release && yum -y install neofetch
 
 %environment
-    export LC_ALL=C
+export LC_ALL=C
+
+%runscript
+echo "Testing execution inside container"
+exec neofetch
+
+%post
+echo "This section happens once after bootstrap to build the image"
